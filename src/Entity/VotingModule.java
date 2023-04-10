@@ -1,27 +1,24 @@
 package Entity;
 
-import MyADT.MyHashMap;
-
-import java.util.HashSet;
-import java.util.Set;
+import MyADT.*;
 
 public class VotingModule {
-    public MyHashMap<String, Set<String>> voteMap = new MyHashMap<>();
+    public MyHashMap<String, HashSet<String>> voteMap = new MyHashMap<>();
     //    public Set<String> voterSet = new HashSet<>();
     public Voter voters = new Voter();
 
     public VotingModule(){
-        MyHashMap<String, Set<Voter>> voteMap = new MyHashMap<>();
+        MyHashMap<String, HashSet<Voter>> voteMap = new MyHashMap<>();
     }
 
 
     public void addVote(String book, Voter voter){
         String voterName = voter.getName();
         if (voteMap.containsKey(book)) {
-            Set<String> voterSet = voteMap.get(book);
+            HashSet<String> voterSet = voteMap.get(book);
             voterSet.add(voterName);
         } else {
-            Set<String> voterSet = new HashSet<>();
+            HashSet<String> voterSet = new HashSet<>();
             voterSet.add(voterName);
             voteMap.put(book,voterSet);
         }
@@ -29,19 +26,19 @@ public class VotingModule {
     }
 
 
-    public Set<String> showVoters(String book){
-        Set<String> voterName = voteMap.get(book);
+    public HashSet<String> showVoters(String book){
+        HashSet<String> voterName = voteMap.get(book);
         return voterName;
     }
 
     public int countVotes(String book){
-        Set<String> voterName = voteMap.get(book);
+        HashSet<String> voterName = voteMap.get(book);
         int count =voterName.size();
         return count;
     }
 
-    public Set<String> showVotedBooks(){
-        Set<String> votedBooks = voteMap.getKeys();
+    public HashSet<String> showVotedBooks(){
+        HashSet<String> votedBooks = voteMap.getKeys();
         return votedBooks;
     }
 

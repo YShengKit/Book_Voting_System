@@ -1,7 +1,5 @@
 package MyADT;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
     private final int SIZE = 16; // initial capacity of the array
@@ -94,8 +92,8 @@ public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
     }
 
     @Override
-    public Set<K> getKeys(){
-        Set<K> keySet = new HashSet<>();
+    public HashSet<K> getKeys(){
+        HashSet<K> keySet = new HashSet<>();
         for (Entry<K, V> entry : entries) {
             while (entry != null) {
                 keySet.add(entry.key);
