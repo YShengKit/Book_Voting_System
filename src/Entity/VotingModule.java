@@ -53,4 +53,32 @@ public class VotingModule {
     public String toString() {
         return voteMap.toString();
     }
+
+    private HashSet<String> allbooks = new HashSet<>();
+    public HashSet<String> displayCategory(MyHashMap<String, HashSet<String>> book_cat){
+        //books: categories (each book might have multiple categories)
+        allbooks = book_cat.getKeys();
+        HashSet<String> temp_cat_list = new HashSet<>();
+        String[] s = {};
+        for (int i = 0; i < allbooks.size(); i++) {
+            s =  book_cat.get(allbooks.toArray()[i]).toArray();
+            for (int j = 0; j < s.length; j++) {
+                temp_cat_list.add(s[j]);
+            }
+        }
+        return temp_cat_list;
+    }
+
+    public HashSet<String> displayBook(MyHashMap<String, HashSet<String>> book_cat, String category){
+        String[] temp = {};
+        HashSet<String> temp_book_lists = new HashSet<>();
+        for (int i = 0; i < allbooks.size(); i++) {
+            temp = book_cat.get(allbooks.toArray()[i]).toArray();
+            for (int j = 0; j < temp.length; j++) {
+                if (category.equals(temp[j]))
+                    temp_book_lists.add(allbooks.toArray()[i]);
+            }
+
+        }return temp_book_lists;
+    }
 }
