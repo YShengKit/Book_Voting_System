@@ -3,13 +3,15 @@ package Client;
 
 import java.util.Scanner;
 
+import Entity.Voter;
 import Entity.VotingModule;
 import MyADT.*;
 
 public class mainDrive {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String users2 = "Chai";
+        VotingModule voteMap = new VotingModule();
+        Voter voter1 = new Voter(1, "John", voteMap);
         HashSet<String> books = new HashSet<>();
 
         MyHashMap<String, HashSet<String>> book_cat= new MyHashMap<>();
@@ -45,6 +47,17 @@ public class mainDrive {
         for (int i=0; i<temp_book_lists.size(); i++){
             System.out.println((i+1) + ". " + temp_book_lists.toArray()[i]);
         }
+
+        System.out.println("Which book u want to vote?");
+        int choice_book = sc.nextInt();
+
+        voter1.addVote(temp_book_lists.toArray()[choice_book-1]);
+
+        String[] abc = voteMap.showVotedBooks();
+        for (int i = 0; i < abc.length; i++) {
+            System.out.println(abc[i]);
+        }
+        voter1.showRanking();
     }
 
 }
