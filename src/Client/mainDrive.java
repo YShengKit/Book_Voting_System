@@ -58,27 +58,6 @@ public class mainDrive {
         bookOnly.put(b5.getBookID(),b5);
 
 
-//        HashSet<String> books = new HashSet<>();
-//
-//        MyHashMap<String, HashSet<String>> book_cat= new MyHashMap<>();
-//        //books: categories (each book might have multiple categories)
-//        books.add("book1");
-//        books.add("book2");
-//        books.add("book3");
-//        books.add("book4");
-//        books.add("book5");
-//
-//        HashSet<String> cat1 = new HashSet<>();
-//        cat1.add("cat1");
-//        cat1.add("cat2");
-//        HashSet<String> cat2 = new HashSet<>();
-//        cat2.add("cat3");
-//        cat2.add("cat4");
-//        //voters: books that voters voted (implement in voters system)
-//        book_cat.put("book1",cat1); //cat1 and cat2
-//        book_cat.put("book2",cat2); //cat3 and cat4
-//        book_cat.put("book3",cat2); //cat3 and cat4
-//        book_cat.put("book5",cat2);
 
         Scanner sc = new Scanner(System.in);
 

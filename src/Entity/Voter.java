@@ -63,9 +63,32 @@ public class Voter {
         voterList.remove(this.getName());
     }
 
-    public void showRanking(){
-        for(String i: voteMap.showVotedBooks()){
-            System.out.println(i + " : " + voteMap.countVotes(i));
+    public void showRanking() {
+        SortedArray<Integer> sortedArray = new SortedArray<>(voteMap.size());
+        MyHashMap<Integer, HashSet<String>> rank = new MyHashMap<>();
+
+        for (String book : voteMap.showVotedBooks()) {
+            int voteCount = voteMap.countVotes(book);
+            if (rank.containsKey(voteCount)) {
+                HashSet<String> bookList = rank.get(voteCount);
+                bookList.add(book);
+                sortedArray.add(voteCount);
+            } else {
+                HashSet<String> bookList = new HashSet<>();
+                bookList.add(book);
+                rank.put(voteCount, bookList);
+                sortedArray.add(voteCount);
+            }
+        }
+
+        Integer[] sortedArr = sortedArray.getSortedArr();
+        int prevVoteCount = Integer.MAX_VALUE;
+        for (int i : sortedArr) {
+            HashSet<String> books = rank.get(i);
+            if (i != prevVoteCount) {
+                System.out.println(books + " : " + i);
+            }
+            prevVoteCount = i;
         }
     }
 }

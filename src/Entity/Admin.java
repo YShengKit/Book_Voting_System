@@ -55,7 +55,6 @@ public class Admin {
     public void removeBook(Book bookObject){
         //remove
         String bookName = bookObject.getBookName();
-//        int bookID = bookObject.getBookID();
         HashSet<String> cat_list= adminBookLists.getKeys();
         for(String i : cat_list.toArray()){
             HashSet<String> bookList = adminBookLists.get(i);
@@ -64,6 +63,8 @@ public class Admin {
             }
         }
     }
+
+
 
     public void addToBookList(String category ,Book bookObject){
         String bookName = bookObject.getBookName();

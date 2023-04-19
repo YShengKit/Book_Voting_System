@@ -49,6 +49,10 @@ public class VotingModule {
         voteMap.remove(book);
     }
 
+    public int size(){
+        return voteMap.size();
+    }
+
     @Override
     public String toString() {
         return voteMap.toString();
