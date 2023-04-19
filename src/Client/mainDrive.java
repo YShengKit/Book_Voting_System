@@ -1,6 +1,7 @@
 package Client;
 
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import Entity.*;
@@ -83,10 +84,15 @@ public class mainDrive {
 
         while (currentVoter == null) {
             System.out.println("Welcome to TARUMT Book Voting System");
-            System.out.println("1. Voter\n 2. Admin\n Select role to continue");
-            int roleChoice = sc.nextInt();
-
-            if (roleChoice == 1){
+            System.out.println("1. Voter\n2. Admin\nSelect role to continue");
+            String roleChoice = sc.next();
+            while (!roleChoice.equals("1") && !roleChoice.equals("2")) {
+                System.out.println("Input is invalid. Enter again...");
+                System.out.println("1. Admin");
+                System.out.println("2. Student");
+                roleChoice = sc.next();
+            }
+            if (roleChoice.equals("1")){
                 // Login loop for voter
 
                 System.out.println("Enter voter ID:");
@@ -106,39 +112,49 @@ public class mainDrive {
                     System.out.println("Hi " + currentVoter.getName() + ", welcome to Book Voting System\n 1. vote \n 2. check rank \n 3. logout");
                     int menuChoices = sc.nextInt();
                     if (menuChoices ==1){
-//                        VotingModule vm = new VotingModule();
-//                        HashSet<String> temp_cat_list = vm.displayCategory(book_cat);
-//                        for (int i = 0; i < temp_cat_list.size(); i++) {
-//                            System.out.println((i+1) + ". " + temp_cat_list.toArray()[i]);
-//                        }
+
                         HashSet<String> temp_cat_list = bookLists.getKeys();
                         for (int i = 0; i < temp_cat_list.size(); i++) {
                             System.out.println((i+1) + ". " + temp_cat_list.toArray()[i]);
                         }
 
                         System.out.println("Which category u want to choose?(use no.)");
-                        int cat_choice = sc.nextInt();
 
-                        String category = temp_cat_list.toArray()[cat_choice - 1] ;
+                        String cat_choice = sc.next();
+                        while (!(cat_choice.matches("\\d+"))) {
+                            System.out.println("Choose again\nChoose a category:");
+                            cat_choice = sc.next();
+                        }
+                        while (Integer.parseInt(cat_choice) > temp_cat_list.size()) {
+                            System.out.println("Choose again\nChoose a category:");
+                            cat_choice = sc.next();
+                        }
 
-//                        HashSet<String> temp_book_lists = vm.displayBook(book_cat, category);
-//                        for (int i=0; i<temp_book_lists.size(); i++){
-//                            System.out.println((i+1) + ". " + temp_book_lists.toArray()[i]);
-//                        }
+                        String category = temp_cat_list.toArray()[Integer.parseInt(cat_choice)-1] ;
+
+
                         HashSet<String> temp_book_lists = bookLists.get(category);
                         for (int i=0; i<temp_book_lists.size(); i++){
                             System.out.println((i+1) + ". " + temp_book_lists.toArray()[i]);
                         }
 
                         System.out.println("Which book u want to vote?");
-                        int choice_book = sc.nextInt();
+                        String choice_book = sc.next();
+                        while (!(choice_book.matches("\\d+"))) {
+                            System.out.println("Choose again\nWhich book u want to vote?");
+                            choice_book = sc.next();
+                        }
+                        while (Integer.parseInt(choice_book) > temp_book_lists.size()) {
+                            System.out.println("Choose again\nWhich book u want to vote?");
+                            choice_book = sc.next();
+                        }
 
-                        currentVoter.addVote(temp_book_lists.toArray()[choice_book-1]);
-
-//                    String[] abc = voteMap.showVotedBooks();
-//                    for (int i = 0; i < abc.length; i++) {
-                        System.out.println("You have voted for "+ currentVoter.getVotedBook());
-//                    }
+                        boolean res = currentVoter.addVote(temp_book_lists.toArray()[Integer.parseInt(choice_book)-1]);
+                        if (!res){
+                            System.out.println("You have voted "+ currentVoter.getVotedBook() + " before");
+                        }else{
+                            System.out.println("You have voted for " + currentVoter.getVotedBook());
+                        }
 
                     }else if (menuChoices==2){
                         currentVoter.showRanking();
@@ -151,20 +167,29 @@ public class mainDrive {
                     }
 
                 }
-            }else if(roleChoice == 2) {
+            }else if(roleChoice.equals("2")) {
                 while(stat){
                     System.out.println("Hi "  + ", welcome to Admin System\n 1. Create Book \n 2. Check all category list \n 3. Show hashmap \n 4. Remove book \n 5. Check book details \n 6. Log out ");
                     int menuChoices = sc.nextInt();
                     if (menuChoices ==1){
                         String [] cats = cat.toArray();
                         for(int i =0; i<cats.length;i++) {
-                            System.out.println(i + ". " + cats[i]);
+                            System.out.println((i+1) + ". " + cats[i]);
                         }
                         System.out.println("Select one category");
-                        int catchoice = sc.nextInt();
-                        String catchosen = cats[catchoice];
+                        String catchoice = sc.next();
+                        while (!(catchoice.matches("\\d+"))) {
+                            System.out.println("Choose again\nChoose a category:");
+                            catchoice = sc.next();
+                        }
+                        while (Integer.parseInt(catchoice) > cats.length) {
+                            System.out.println("Choose again\nChoose a category:");
+                            catchoice = sc.next();
+                        }
+
+                        String catchosen = cats[Integer.parseInt(catchoice)-1];
                         System.out.println("Enter Book ID:");
-                        int bookid = sc.nextInt();
+                        int bookid=sc.nextInt();
                         System.out.println("Enter Book name:");
                         String bookname = sc.next();
                         System.out.println("Enter author name:");
@@ -195,7 +220,7 @@ public class mainDrive {
 
                     }else if (menuChoices == 5){
                         System.out.println("Insert the BookID:");
-//                    System.out.println(bookOnly);
+
                         int bookID = sc.nextInt();
                         String name = bookOnly.get(bookID).getBookName();
                         String aname = bookOnly.get(bookID).getAuthorName();

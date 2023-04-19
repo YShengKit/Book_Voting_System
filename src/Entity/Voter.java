@@ -49,10 +49,11 @@ public class Voter {
 // getter and setter methods for id and name go here
 
 
-    public void addVote(String book){
+    public boolean addVote(String book){
         //store as set
-        votedBook.add(book);
+        boolean res = votedBook.add(book);
         this.voteMap.addVote(book,this);
+        return res;
     }
 
     public void removeVote(String book){
