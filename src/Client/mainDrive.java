@@ -109,7 +109,7 @@ public class mainDrive {
                 }
 
                 while(currentVoter!=null){
-                    System.out.println("Hi " + currentVoter.getName() + ", welcome to Book Voting System\n 1. vote \n 2. check rank \n 3. logout");
+                    System.out.println("Hi " + currentVoter.getName() + ", Welcome to Book Voting System\n 1. Cast Vote \n 2. Check Vote Ranking \n 3. Profile \n 4. Remove Vote \n 5. Logout");
                     int menuChoices = sc.nextInt();
                     if (menuChoices ==1){
 
@@ -118,7 +118,7 @@ public class mainDrive {
                             System.out.println((i+1) + ". " + temp_cat_list.toArray()[i]);
                         }
 
-                        System.out.println("Which category u want to choose?(use no.)");
+                        System.out.println("Which category u want to choose?(use index no.)");
 
                         String cat_choice = sc.next();
                         while (!(cat_choice.matches("\\d+"))) {
@@ -158,10 +158,32 @@ public class mainDrive {
 
                     }else if (menuChoices==2){
                         currentVoter.showRanking();
-                    }else if(menuChoices == -1) {
-                        break;
-                    }else{
-                        //logout
+
+                    }else if(menuChoices == 3){
+                        HashSet<String> votedBookList = currentVoter.getVotedBook();
+                        for(int i =0; i<votedBookList.size();i++){
+                            System.out.println(i + ". " + votedBookList.toArray()[i]);
+                        }
+                        System.out.println("Books you have voted");
+
+                    }else if(menuChoices == 4){
+                        HashSet<String> votedBookList = currentVoter.getVotedBook();
+                        for(int i =0; i<votedBookList.size();i++){
+                            System.out.println(i + ". " + votedBookList.toArray()[i]);
+                        }
+                        System.out.println("Choose the book to remove (no.)");
+                        int remove_choice = sc.nextInt();
+
+                        while (remove_choice > votedBookList.size()) {
+                            System.out.println("Choose again\nChoose a book:");
+                            remove_choice = sc.nextInt();
+                        }
+
+                        String removedBookName = votedBookList.toArray()[remove_choice];
+                        votedBookList.remove(removedBookName);
+                        currentVoter.removeVote(removedBookName);
+
+                    }else if(menuChoices == 5) {
                         System.out.println("proceed to logout");
                         currentVoter = null;
                     }
@@ -213,7 +235,7 @@ public class mainDrive {
                             Book tempBook = bookOnly.get(i);
                             System.out.println(i + ". " + tempBook.getBookName());
                         }
-                        System.out.println("Enter the book you want to remove");
+                        System.out.println("Enter the BookID you want to remove");
                         int removeChoice = sc.nextInt();
                         admin1.removeBook(bookOnly.get(removeChoice));
                         bookOnly.remove(removeChoice);
