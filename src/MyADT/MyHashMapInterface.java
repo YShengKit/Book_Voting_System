@@ -10,4 +10,5 @@ public interface MyHashMapInterface <K, V> {
     void remove(K key);
     int size();
     void resize();
+    String toString();
 }

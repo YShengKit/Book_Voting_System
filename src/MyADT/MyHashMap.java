@@ -156,6 +156,19 @@ public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
 
     @Override
     public void resize() {
+//        might not required
+    }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < SIZE; i++) {
+            Entry<K, V> entry = entries[i];
+            while (entry != null) {
+                sb.append(i+") "+entry.key + " -> " + entry.value + ",");
+                entry = entry.next;
+            }sb.append(i+") null " + "\n");
+        }
+        return sb.toString();
     }
 }

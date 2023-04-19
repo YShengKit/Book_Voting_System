@@ -44,7 +44,7 @@ public class HashSet<E> implements HashSetInterface<E> {
 
     public int hash(E e){
         int hashCode = e.hashCode();
-        return hashCode % capacity;
+        return (hashCode & 0x7FFFFFFF) % capacity;
     }
 
     private void resize(){
