@@ -15,6 +15,8 @@ public interface HashSetInterface<Object> {
 
     String[] toArray();
 
+    Integer[] toIntArray();
+
     String toString();
 
 }

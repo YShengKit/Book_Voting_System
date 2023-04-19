@@ -138,6 +138,25 @@ public class HashSet<E> implements HashSetInterface<E> {
     }
 
     @Override
+    //only return string type array
+    public Integer[] toIntArray() {
+        Object[] arr = new Object[size];
+        int i = 0;
+        for (Node<E> node : table) {
+            while (node != null) {
+                arr[i] = node.value;
+                node = node.next;
+                i++;
+            }
+        }
+        Integer[] result = new Integer[size];
+        for (i = 0; i < size; i++) {
+            result[i] = (Integer) arr[i];
+        }
+        return result;
+    }
+
+    @Override
     public String toString() {
         if (isEmpty()) {
             return "[]";
