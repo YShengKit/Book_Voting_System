@@ -258,7 +258,7 @@ public class mainDrive {
                         System.out.println("========================================");
                         HashSet<String> votedBookList = currentVoter.getVotedBook();
                         for(int i =0; i<votedBookList.size();i++){
-                            System.out.println("             "+i + ". " + votedBookList.toArray()[i]);
+                            System.out.println("             "+(i+1) + ". " + votedBookList.toArray()[i]);
                         }
                         System.out.println("========================================");
 
@@ -266,18 +266,27 @@ public class mainDrive {
                         System.out.printf("\n  //          Which book do you want to remove?(no.)    //");
                         System.out.printf("\n //====================================================//");
                         System.out.printf("\n           Your choice: ");
-                        int remove_choice = sc.nextInt();
+                        String remove_choice = sc.next();
 
-                        while (remove_choice > votedBookList.size()) {
+                        while (!(remove_choice.matches("\\d+"))) {
                             System.out.printf("\n  ***************************************************");
                             System.out.printf("\n //         Invalid input! Choose again           //");
                             System.out.printf("\n***************************************************");
                             System.out.printf("\n  Which book do you want to remove?(use index no.)");
                             System.out.printf("\n            Choose again: ");
-                            remove_choice = sc.nextInt();
+                            remove_choice = sc.next();
                         }
 
-                        String removedBookName = votedBookList.toArray()[remove_choice];
+                        while (Integer.parseInt(remove_choice) > votedBookList.size()|| Integer.parseInt(remove_choice)==0) {
+                            System.out.printf("\n  ***************************************************");
+                            System.out.printf("\n //         Invalid input! Choose again           //");
+                            System.out.printf("\n***************************************************");
+                            System.out.printf("\n  Which book do you want to remove?(use index no.)");
+                            System.out.printf("\n            Choose again: ");
+                            remove_choice = sc.next();
+                        }
+
+                        String removedBookName = votedBookList.toArray()[Integer.parseInt(remove_choice)-1];
                         votedBookList.remove(removedBookName);
                         currentVoter.removeVote(removedBookName);
 
@@ -354,6 +363,7 @@ public class mainDrive {
                         System.out.printf("\n   //====================================================//");
                         System.out.printf("\n  //   Which category u want to choose?(use index no.)  //");
                         System.out.printf("\n //====================================================//");
+                        System.out.printf("\n             Your choice: ");
                         String catchoice = sc.next();
                         while (!(catchoice.matches("\\d+"))) {
                             System.out.printf("\n  ***************************************************");
@@ -393,7 +403,7 @@ public class mainDrive {
                         System.out.printf("\n   ////////////////////////////////////////");
                         System.out.printf("\n  //         Showing all category       //");
                         System.out.printf("\n ////////////////////////////////////////");
-                        System.out.println("========================================");
+                        System.out.println("\n========================================");
                         for (int i = 0; i < cat.size(); i++) {
                             System.out.println("             "+cat.toArray()[i]);
                         }
@@ -401,7 +411,7 @@ public class mainDrive {
                     }else if(menuChoices.equals("3")){
                         System.out.printf("\n   ////////////////////////////////////////");
                         System.out.printf("\n  //         Showing the hashmap        //");
-                        System.out.printf("\n ////////////////////////////////////////");
+                        System.out.printf("\n ////////////////////////////////////////\n");
                         System.out.println(bookLists);
 
                     }else if (menuChoices.equals("4")){
@@ -409,7 +419,7 @@ public class mainDrive {
                         System.out.printf("\n  //         Showing all books          //");
                         System.out.printf("\n ////////////////////////////////////////");
                         HashSet<Integer> bookID_list = bookOnly.getKeys();
-                        System.out.println("========================================");
+                        System.out.println("\n========================================");
                         for (int i = 0; i < bookID_list.size(); i++) {
                             System.out.println("             "+bookID_list.toIntArray()[i] + " " + bookOnly.get(bookID_list.toIntArray()[i]).getBookName());
                         }
@@ -417,6 +427,14 @@ public class mainDrive {
                         System.out.printf("Insert the BookID:");
 
                         int bookID = sc.nextInt();
+                        while(!bookOnly.containsKey(bookID)){
+                            System.out.printf("\n  ***************************************************");
+                            System.out.printf("\n //         Invalid BookID! Choose again           //");
+                            System.out.printf("\n***************************************************");
+                            System.out.printf("\n                     Choose again: ");
+                            bookID = sc.nextInt();
+                        }
+
                         String name = bookOnly.get(bookID).getBookName();
                         String aname = bookOnly.get(bookID).getAuthorName();
                         HashSet<String> bookCat= bookOnly.get(bookID).getCategoryList();
