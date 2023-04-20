@@ -5,14 +5,16 @@ public class Book {
     private int bookID;
     private String bookName;
     private String authorName;
+    private String descriptions;
     private HashSet<String> categoryList;
 
 
 
-    public Book(int bookID, String bookName, String authorName) {
+    public Book(int bookID, String bookName, String authorName, String descriptions) {
         this.bookID = bookID;
         this.bookName = bookName;
         this.authorName = authorName;
+        this.descriptions = descriptions;
         this.categoryList = new HashSet<>();
     }
 
@@ -49,4 +51,7 @@ public class Book {
         this.categoryList = categoryList;
     }
 
+    public String getDescriptions() { return descriptions; }
+
+    public void setDescriptions(String descriptions) { this.descriptions = descriptions; }
 }

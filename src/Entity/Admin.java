@@ -47,8 +47,8 @@ public class Admin {
 
 
 //    add book
-    public Book addBook(int bookID, String bookName, String author){
-        Book book = new Book(bookID,bookName,author);
+    public Book addBook(int bookID, String bookName, String author, String descriptions){
+        Book book = new Book(bookID,bookName,author,descriptions);
         return book;
     }
 
