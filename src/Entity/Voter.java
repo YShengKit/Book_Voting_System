@@ -90,5 +90,7 @@ public class Voter {
             }
             prevVoteCount = i;
         }
+        int highest = sortedArr[0];
+        System.out.println("Current winner --> "+ rank.get(highest)+ " with vote count of " + highest);
     }
 }
