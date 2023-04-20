@@ -81,16 +81,27 @@ public class Voter {
             }
         }
 
+        System.out.printf("\n            //====================================================//");
+        System.out.printf("\n           //                  Current Vote Rank                 //");
+        System.out.printf("\n          //====================================================//\n");
         Integer[] sortedArr = sortedArray.getSortedArr();
         int prevVoteCount = Integer.MAX_VALUE;
         for (int i : sortedArr) {
             HashSet<String> books = rank.get(i);
             if (i != prevVoteCount) {
-                System.out.println(books + " : " + i);
+                System.out.println("                      "+books + " : " + i);
             }
             prevVoteCount = i;
         }
+
         int highest = sortedArr[0];
-        System.out.println("Current winner --> "+ rank.get(highest)+ " with vote count of " + highest);
+        System.out.printf("\n      //====================================================//");
+        System.out.printf("\n     //   Current  o o o o > "+rank.get(highest)+"                     //");
+        System.out.printf("\n    //    Winner   o o o o >                               //");
+        System.out.printf("\n   //                                                     //");
+        System.out.printf("\n  //    Vote     o o o o >  "+ highest+"                            //");
+        System.out.printf("\n //    Count    o o o o >                              //");
+        System.out.printf("\n//====================================================//");
+//        System.out.println("Current winner --> "+ rank.get(highest)+ " with vote count of " + highest);
     }
 }

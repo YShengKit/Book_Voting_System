@@ -53,7 +53,6 @@ public class SortedArray<T extends Comparable<T>> implements SortedArrayInterfac
         Object[] arr = new Object[size];
         for (int i = 0; i < size; ++i) {
             arr[i]= array[i];
-            System.out.println(array[i]);
         }
         Integer[] result = new Integer[size];
         for (int i=0; i<size; i++){
