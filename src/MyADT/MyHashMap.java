@@ -154,10 +154,6 @@ public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
         return size;
     }
 
-    @Override
-    public void resize() {
-//        might not required
-    }
 
     @Override
     public String toString() {

@@ -9,6 +9,5 @@ public interface MyHashMapInterface <K, V> {
     boolean containsKey(K key);
     void remove(K key);
     int size();
-    void resize();
     String toString();
 }

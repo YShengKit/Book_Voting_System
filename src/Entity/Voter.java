@@ -102,6 +102,5 @@ public class Voter {
         System.out.printf("\n  //    Vote     o o o o >  "+ highest+"                            //");
         System.out.printf("\n //    Count    o o o o >                              //");
         System.out.printf("\n//====================================================//");
-//        System.out.println("Current winner --> "+ rank.get(highest)+ " with vote count of " + highest);
     }
 }
