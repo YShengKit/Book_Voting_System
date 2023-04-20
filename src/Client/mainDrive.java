@@ -88,8 +88,16 @@ public class mainDrive {
 
                 while(currentVoter!=null){
                     System.out.println("Hi " + currentVoter.getName() + ", Welcome to Book Voting System\n 1. Cast Vote \n 2. Check Vote Ranking \n 3. Profile \n 4. Book details \n 5. Remove Vote \n 6. Logout");
-                    int menuChoices = sc.nextInt();
-                    if (menuChoices ==1){
+                    String menuChoices = sc.next();
+                    while (!(menuChoices.matches("\\d+"))) {
+                        System.out.println("Choose again\nWelcome to Book Voting System\n 1. Cast Vote \n 2. Check Vote Ranking \n 3. Profile \n 4. Book details \n 5. Remove Vote \n 6. Logout");
+                        menuChoices = sc.next();
+                    }
+                    while (Integer.parseInt(menuChoices) > 7 || Integer.parseInt(menuChoices)==0) {
+                        System.out.println("Choose again\nWelcome to Book Voting System\n 1. Cast Vote \n 2. Check Vote Ranking \n 3. Profile \n 4. Book details \n 5. Remove Vote \n 6. Logout");
+                        menuChoices = sc.next();
+                    }
+                    if (menuChoices.equals("1")){
 
                         HashSet<String> temp_cat_list = bookLists.getKeys();
                         for (int i = 0; i < temp_cat_list.size(); i++) {
@@ -135,17 +143,17 @@ public class mainDrive {
                             System.out.println("You have voted for " + currentVoter.getVotedBook());
                         }
 
-                    }else if (menuChoices==2){
+                    }else if (menuChoices.equals("2")){
                         currentVoter.showRanking();
 
-                    }else if(menuChoices == 3){
+                    }else if(menuChoices.equals("3")){
                         HashSet<String> votedBookList = currentVoter.getVotedBook();
                         for(int i =0; i<votedBookList.size();i++){
                             System.out.println((i+1) + ". " + votedBookList.toArray()[i]);
                         }
                         System.out.println("Books you have voted");
 
-                    }else if(menuChoices == 4){
+                    }else if(menuChoices.equals("4")){
                         HashSet<Integer> bookIDLists = bookOnly.getKeys();
                         for (Integer i: bookIDLists.toIntArray()){
                             Book tempBook = bookOnly.get(i);
@@ -161,7 +169,7 @@ public class mainDrive {
                         System.out.println(bookCat);
                         System.out.println("Description of the book: ");
                         System.out.println(desc);
-                    }else if(menuChoices == 5){
+                    }else if(menuChoices.equals("5")){
                         HashSet<String> votedBookList = currentVoter.getVotedBook();
                         for(int i =0; i<votedBookList.size();i++){
                             System.out.println(i + ". " + votedBookList.toArray()[i]);
@@ -178,7 +186,7 @@ public class mainDrive {
                         votedBookList.remove(removedBookName);
                         currentVoter.removeVote(removedBookName);
 
-                    }else if(menuChoices == 6) {
+                    }else if(menuChoices.equals("6")) {
                         System.out.println("proceed to logout");
                         currentVoter = null;
                     }else {
@@ -190,9 +198,17 @@ public class mainDrive {
             //admin side
             else if(roleChoice.equals("2")) {
                 while(true){
-                    System.out.println("Hi "  + ", welcome to Admin System\n 1. Create Book \n 2. Check all category list \n 3. Show hashmap \n 4. Check book details \n 5. Log out ");
-                    int menuChoices = sc.nextInt();
-                    if (menuChoices ==1){
+                    System.out.println("Hi "  + ", welcome to Admin System\n 1. Create Book \n 2. Check all category list \n 3. Show hashmap \n 4. Check book details\n5. Add Category \n 6. Log out ");
+                    String menuChoices = sc.next();
+                    while (!(menuChoices.matches("\\d+"))) {
+                        System.out.println("Choose again\nwelcome to Admin System\n 1. Create Book \n 2. Check all category list \n 3. Show hashmap \n 4. Check book details \n 6. Log out ");
+                        menuChoices = sc.next();
+                    }
+                    while (Integer.parseInt(menuChoices) > 7 || Integer.parseInt(menuChoices)==0) {
+                        System.out.println("Choose again\nwelcome to Admin System\n 1. Create Book \n 2. Check all category list \n 3. Show hashmap \n 4. Check book details \n 6. Log out ");
+                        menuChoices = sc.next();
+                    }
+                    if (menuChoices.equals("1")){
                         String [] cats = cat.toArray();
                         for(int i =0; i<cats.length;i++) {
                             System.out.println((i+1) + ". " + cats[i]);
@@ -225,14 +241,16 @@ public class mainDrive {
                         admin1.addToBookList(catchosen,tempbook);
                         bookOnly.put(tempbook.getBookID(),tempbook);
 
-                    }else if (menuChoices==2){
+                    }else if (menuChoices.equals("2")){
                         System.out.println("Showing all category");
-                        System.out.println(bookLists.getKeys());
-                    }else if(menuChoices==3){
+                        for (int i = 0; i < cat.size(); i++) {
+                            System.out.println(cat.toArray()[i]);
+                        }
+                    }else if(menuChoices.equals("3")){
                         System.out.println("Showing the hashmap");
                         System.out.println(bookLists);
 
-                    }else if (menuChoices == 4){
+                    }else if (menuChoices.equals("4")){
                         System.out.println("Show all the books");
                         HashSet<Integer> bookID_list = bookOnly.getKeys();
                         for (int i = 0; i < bookID_list.size(); i++) {
@@ -261,9 +279,9 @@ public class mainDrive {
                             String modify_choice ="";
                             do {
                                 System.out.println("Modification Menu");
-                                System.out.println("1. Category\n2. Book Name\n3. Author \n4. Exit");
+                                System.out.println("1. Category\n2. Book Name\n3. Author\n4. Description \n5 . Exit");
                                 modify_choice = sc.next();
-                                while (!(modify_choice.equals("1")) && !(modify_choice.equals("2")) && !(modify_choice.equals("3")) && !(modify_choice.equals("4"))) {
+                                while (!(modify_choice.equals("1")) && !(modify_choice.equals("2")) && !(modify_choice.equals("3")) && !(modify_choice.equals("4")) && !(modify_choice.equals("5"))) {
                                     System.out.println("Invalid input");
                                     System.out.println("1. Category\n2. Book Name\n3. Author \n4. Exit");
                                     modify_choice = sc.next();
@@ -294,7 +312,7 @@ public class mainDrive {
                                         new_cat_list.remove(new_cat_list.toArray()[old_cat_choice-1]);
                                         new_cat_list.add(cat.toArray()[cat_choice-1]);
                                         bookOnly.get(bookID).setCategoryList(new_cat_list);
-
+                                        admin1.addToBookList(new_cat_list.toArray()[old_cat_choice-1],bookOnly.get(bookID));
                                         System.out.println(bookOnly.get(bookID).getCategoryList());
                                     } else if (modify_cat.equals("2")) {
                                         for(int i=0; i < cat.size(); i++){
@@ -304,26 +322,35 @@ public class mainDrive {
                                         int cat_choice = sc.nextInt();
                                         HashSet<String> new_cat_list = bookOnly.get(bookID).getCategoryList();
                                         new_cat_list.add(cat.toArray()[cat_choice-1]);
+                                        admin1.addToBookList(new_cat_list.toArray()[cat_choice-1],bookOnly.get(bookID));
                                         bookOnly.get(bookID).setCategoryList(new_cat_list);
                                         System.out.println("Successfully added");
                                     } else if (modify_cat.equals("3")) {
                                         HashSet<String> new_cat_list = bookOnly.get(bookID).getCategoryList();
-                                        System.out.println("Current category list for " + bookOnly.get(bookID).getBookName());
-                                        for (int i = 0; i < new_cat_list.size(); i++) {
-                                            System.out.println((i+1) + ". " + new_cat_list.toArray()[i]);
-                                        }
-                                        System.out.println("Choose a category(no.) to remove: ");
-                                        int old_cat_choice = sc.nextInt();
-                                        new_cat_list.remove(new_cat_list.toArray()[old_cat_choice-1]);
-                                        bookOnly.get(bookID).setCategoryList(new_cat_list);
+                                        if (new_cat_list.size() !=1 ){
+                                            System.out.println("Current category list for " + bookOnly.get(bookID).getBookName());
+                                            for (int i = 0; i < new_cat_list.size(); i++) {
+                                                System.out.println((i+1) + ". " + new_cat_list.toArray()[i]);
+                                            }
+                                            System.out.println("Choose a category(no.) to remove: ");
+                                            int old_cat_choice = sc.nextInt();
+                                            admin1.addToBookList(new_cat_list.toArray()[old_cat_choice-1],bookOnly.get(bookID));
+                                            new_cat_list.remove(new_cat_list.toArray()[old_cat_choice-1]);
+                                            bookOnly.get(bookID).setCategoryList(new_cat_list);
 
-                                        System.out.println(bookOnly.get(bookID).getCategoryList());
+                                            System.out.println(bookOnly.get(bookID).getCategoryList());
+                                        }
+                                        else{
+                                            System.out.println("Each book must have at least one category");
+                                        }
+
                                     }
                                 }
 
                                 else if (modify_choice.equals("2")) {
                                     System.out.println("Enter new book name: ");
-                                    String new_bookName= sc.nextLine();
+                                    sc.useDelimiter("\n");
+                                    String new_bookName= sc.next();
                                     String old = bookOnly.get(bookID).getBookName();
                                     bookOnly.get(bookID).setBookName(new_bookName);
                                     System.out.println(old + " have successfully changed to " + new_bookName);
@@ -331,25 +358,35 @@ public class mainDrive {
                                 }
                                 else if (modify_choice.equals("3")) {
                                     System.out.println("Enter new author name: ");
+                                    sc.useDelimiter("\n");
                                     String new_authorName= sc.next();
 
                                     String old = bookOnly.get(bookID).getAuthorName();
                                     bookOnly.get(bookID).setAuthorName(new_authorName);
                                     System.out.println(old + " have successfully changed to " + new_authorName);
                                 }
-                                else {
-                                    System.out.println("hi");
+                                else if (modify_choice.equals("4")) {
+                                    System.out.println("Enter new description: ");
+                                    sc.useDelimiter("\n");
+                                    String new_desc= sc.next();
+                                    bookOnly.get(bookID).setDescriptions(new_desc);
+                                    System.out.println("Successfully changed");
                                 }
 
 
-                            }while (!(modify_choice.equals("4")));
+                            }while (!(modify_choice.equals("5")));
                         }
                         else if (update_choice.equals("2")){
                             System.out.println(bookOnly.get(bookID).getBookName() + " have been removed");
                             admin1.removeBook(bookOnly.get(bookID));
                             bookOnly.remove(bookID);
                         }
-                    }else if(menuChoices == 5) {
+                    }else if(menuChoices.equals("5")) {
+                        System.out.println("Enter new category: ");
+                        sc.useDelimiter("\n");
+                        String new_cat = sc.next();
+                        cat.add(new_cat);
+                    }else if(menuChoices.equals("6")) {
                         System.out.println("proceed to logout");
                         break;
                     }else {
