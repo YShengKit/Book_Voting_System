@@ -190,7 +190,7 @@ public class mainDrive {
             //admin side
             else if(roleChoice.equals("2")) {
                 while(true){
-                    System.out.println("Hi "  + ", welcome to Admin System\n 1. Create Book \n 2. Check all category list \n 3. Show hashmap \n 4. Remove book \n 5. Check book details \n 6. Log out ");
+                    System.out.println("Hi "  + ", welcome to Admin System\n 1. Create Book \n 2. Check all category list \n 3. Show hashmap \n 4. Check book details \n 5. Log out ");
                     int menuChoices = sc.nextInt();
                     if (menuChoices ==1){
                         String [] cats = cat.toArray();
@@ -231,33 +231,16 @@ public class mainDrive {
                     }else if(menuChoices==3){
                         System.out.println("Showing the hashmap");
                         System.out.println(bookLists);
-                    }else if(menuChoices == 4){
-                        HashSet<Integer> bookIDLists = bookOnly.getKeys();
-                        for (Integer i: bookIDLists.toIntArray()){
-                            Book tempBook = bookOnly.get(i);
-                            System.out.println(i + ". " + tempBook.getBookName());
-                        }
-                        System.out.println("Enter the BookID you want to remove");
-                        int removeChoice = sc.nextInt();
-                        while(!bookOnly.containsKey(removeChoice)){
-                            System.out.println("Invalid ID \nEnter the BookID you want to remove");
-                            removeChoice = sc.nextInt();
-                        }
-                        admin1.removeBook(bookOnly.get(removeChoice));
-                        bookOnly.remove(removeChoice);
 
-                    }else if (menuChoices == 5){
-                        HashSet<Integer> bookIDLists = bookOnly.getKeys();
-                        for (Integer i: bookIDLists.toIntArray()){
-                            Book tempBook = bookOnly.get(i);
-                            System.out.println(i + ". " + tempBook.getBookName());
+                    }else if (menuChoices == 4){
+                        System.out.println("Show all the books");
+                        HashSet<Integer> bookID_list = bookOnly.getKeys();
+                        for (int i = 0; i < bookID_list.size(); i++) {
+                            System.out.println(bookID_list.toIntArray()[i] + " " + bookOnly.get(bookID_list.toIntArray()[i]).getBookName());
                         }
                         System.out.println("Insert the BookID:");
+
                         int bookID = sc.nextInt();
-                        while(!bookOnly.containsKey(bookID)){
-                            System.out.println("Invalid ID \nInsert the BookID: ");
-                            bookID = sc.nextInt();
-                        }
                         String name = bookOnly.get(bookID).getBookName();
                         String aname = bookOnly.get(bookID).getAuthorName();
                         HashSet<String> bookCat= bookOnly.get(bookID).getCategoryList();
@@ -266,7 +249,107 @@ public class mainDrive {
                         System.out.println(bookCat);
                         System.out.println("Description of the book: ");
                         System.out.println(desc);
-                    }else if(menuChoices == 6) {
+                        System.out.println("1.Update\n2.Remove\n3.Exit");
+                        String update_choice = sc.next();
+                        while (!(update_choice.equals("1")) && !(update_choice.equals("2")) && !(update_choice.equals("3"))){
+                            System.out.println("Invalid input");
+                            System.out.println("1.Update\n2.Remove\n3.Exit");
+                            update_choice = sc.next();
+                        }
+
+                        if(update_choice.equals("1")){
+                            String modify_choice ="";
+                            do {
+                                System.out.println("Modification Menu");
+                                System.out.println("1. Category\n2. Book Name\n3. Author \n4. Exit");
+                                modify_choice = sc.next();
+                                while (!(modify_choice.equals("1")) && !(modify_choice.equals("2")) && !(modify_choice.equals("3")) && !(modify_choice.equals("4"))) {
+                                    System.out.println("Invalid input");
+                                    System.out.println("1. Category\n2. Book Name\n3. Author \n4. Exit");
+                                    modify_choice = sc.next();
+                                }
+                                if (modify_choice.equals("1")) {
+                                    System.out.println("Modification on category");
+                                    System.out.println("1. Change category\n2. Add category \n3. remove category\n4. Exit");
+                                    String modify_cat = sc.next();
+                                    while (!(modify_cat.equals("1")) && !(modify_cat.equals("2")) && !(modify_cat.equals("3")) && !(modify_cat.equals("4"))) {
+                                        System.out.println("Invalid input");
+                                        System.out.println("1. Change category\n2. Add category \n3. Exit");
+                                        modify_cat = sc.next();
+                                    }
+                                    if (modify_cat.equals("1")){
+                                        HashSet<String> new_cat_list = bookOnly.get(bookID).getCategoryList();
+                                        System.out.println("Current category list for " + bookOnly.get(bookID).getBookName());
+                                        for (int i = 0; i < new_cat_list.size(); i++) {
+                                            System.out.println((i+1) + ". " + new_cat_list.toArray()[i]);
+                                        }
+                                        System.out.println("Choose a category(no.) to change: ");
+                                        int old_cat_choice = sc.nextInt();
+
+                                        for(int i=0; i < cat.size(); i++){
+                                            System.out.println((i+1) + ". " + cat.toArray()[i]);
+                                        }
+                                        System.out.println("Choose a new category: ");
+                                        int cat_choice = sc.nextInt();
+                                        new_cat_list.remove(new_cat_list.toArray()[old_cat_choice-1]);
+                                        new_cat_list.add(cat.toArray()[cat_choice-1]);
+                                        bookOnly.get(bookID).setCategoryList(new_cat_list);
+
+                                        System.out.println(bookOnly.get(bookID).getCategoryList());
+                                    } else if (modify_cat.equals("2")) {
+                                        for(int i=0; i < cat.size(); i++){
+                                            System.out.println((i+1) + ". " + cat.toArray()[i]);
+                                        }
+                                        System.out.println("Choose a category(no.): ");
+                                        int cat_choice = sc.nextInt();
+                                        HashSet<String> new_cat_list = bookOnly.get(bookID).getCategoryList();
+                                        new_cat_list.add(cat.toArray()[cat_choice-1]);
+                                        bookOnly.get(bookID).setCategoryList(new_cat_list);
+                                        System.out.println("Successfully added");
+                                    } else if (modify_cat.equals("3")) {
+                                        HashSet<String> new_cat_list = bookOnly.get(bookID).getCategoryList();
+                                        System.out.println("Current category list for " + bookOnly.get(bookID).getBookName());
+                                        for (int i = 0; i < new_cat_list.size(); i++) {
+                                            System.out.println((i+1) + ". " + new_cat_list.toArray()[i]);
+                                        }
+                                        System.out.println("Choose a category(no.) to remove: ");
+                                        int old_cat_choice = sc.nextInt();
+                                        new_cat_list.remove(new_cat_list.toArray()[old_cat_choice-1]);
+                                        bookOnly.get(bookID).setCategoryList(new_cat_list);
+
+                                        System.out.println(bookOnly.get(bookID).getCategoryList());
+                                    }
+                                }
+
+                                else if (modify_choice.equals("2")) {
+                                    System.out.println("Enter new book name: ");
+                                    String new_bookName= sc.nextLine();
+                                    String old = bookOnly.get(bookID).getBookName();
+                                    bookOnly.get(bookID).setBookName(new_bookName);
+                                    System.out.println(old + " have successfully changed to " + new_bookName);
+
+                                }
+                                else if (modify_choice.equals("3")) {
+                                    System.out.println("Enter new author name: ");
+                                    String new_authorName= sc.next();
+
+                                    String old = bookOnly.get(bookID).getAuthorName();
+                                    bookOnly.get(bookID).setAuthorName(new_authorName);
+                                    System.out.println(old + " have successfully changed to " + new_authorName);
+                                }
+                                else {
+                                    System.out.println("hi");
+                                }
+
+
+                            }while (!(modify_choice.equals("4")));
+                        }
+                        else if (update_choice.equals("2")){
+                            System.out.println(bookOnly.get(bookID).getBookName() + " have been removed");
+                            admin1.removeBook(bookOnly.get(bookID));
+                            bookOnly.remove(bookID);
+                        }
+                    }else if(menuChoices == 5) {
                         System.out.println("proceed to logout");
                         break;
                     }else {
