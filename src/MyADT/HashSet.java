@@ -144,9 +144,15 @@ public class HashSet<E> implements HashSetInterface<E> {
         int i = 0;
         for (Node<E> node : table) {
             while (node != null) {
-                arr[i] = node.value;
-                node = node.next;
-                i++;
+                if (!(node.value instanceof Integer)) { // Validate if node value is not an Integer
+                    System.out.println("Invalid node value");
+                    break;
+                }
+                else{
+                    arr[i] = node.value;
+                    node = node.next;
+                    i++;
+                }
             }
         }
         Integer[] result = new Integer[size];
