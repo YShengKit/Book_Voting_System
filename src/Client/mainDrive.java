@@ -17,10 +17,14 @@ public class mainDrive {
         Voter voter2 = new Voter(456, "Bob",voteMap);
         Voter voter3 = new Voter(234,"john",voteMap);
         Voter voter4 = new Voter(789,"billy",voteMap);
+        Voter voter5 = new Voter(778,"Madison",voteMap);
 
+        //add into voters hashmap (track voter session)
         voters.put(voter1.getId(), voter1);
         voters.put(voter2.getId(), voter2);
         voters.put(voter3.getId(), voter3);
+        voters.put(voter4.getId(), voter4);
+        voters.put(voter5.getId(), voter5);
 
         MyHashMap<String, HashSet<String>> bookLists = new MyHashMap<>();
         MyHashMap<Integer,Book> bookOnly = new MyHashMap<>();
@@ -29,6 +33,7 @@ public class mainDrive {
         Admin admin2 = new Admin(456, "Bob","12345",bookLists);
         Admin admin3 = new Admin(234,"john","123456",bookLists);
 
+        //simple categories
         cat.add("Education");
         cat.add("Programming");
         cat.add("Anime");
@@ -36,6 +41,7 @@ public class mainDrive {
         cat.add("Social");
         cat.add("Politics");
 
+        // sample books with category assigned
         Book b1 = admin1.addBook(123,"How_to_java","james","This is a very hard and fun subject.");
         Book b2 = admin1.addBook(1009,"one_piece","jump","A young guy on a journey to find one piece.");
         Book b3 = admin1.addBook(462,"killers","conny","Series killers in London.");
