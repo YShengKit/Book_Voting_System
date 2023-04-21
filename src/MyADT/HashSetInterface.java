@@ -11,6 +11,7 @@ public interface HashSetInterface<Object> {
 
     /**
      * Task: Adds an entry to the hashset.
+     * new entry must not exist in HashSet, otherwise it won't add into HashSet.
      * The hashset's size increase by 1.
      *
      * @param e the object to be added as a new element
