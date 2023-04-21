@@ -1,5 +1,12 @@
 package MyADT;
-
+/**
+ * HashSetInterface.java
+ * An interface for the ADT HashSet.
+ * It works like an array but no repeated entry in a HashSet
+ *
+ * @author Chai Kian Hun
+ * @param <Object> specifies the datatype of the entry that HashSet store.
+ */
 public interface HashSetInterface<Object> {
 
     /**
