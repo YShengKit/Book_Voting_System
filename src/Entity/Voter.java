@@ -1,6 +1,8 @@
 package Entity;
 import MyADT.*;
 
+/**@author Yeap Sheng Kit */
+
 public class Voter {
     private int id;
     private String name;
@@ -69,6 +71,7 @@ public class Voter {
         voterList.remove(this.getName());
     }
 
+    /**@author Too Chin Xian */
     // display the current ranking of vote
     public void showRanking() {
         // instantiate the sortedArray ADT

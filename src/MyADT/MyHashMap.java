@@ -1,5 +1,9 @@
 package MyADT;
-
+/**
+ * @author Yeap Sheng Kit
+ * @param <K> the Key index for each entries in the MyHashMap.
+ * @param <V> the Value for each correspond Key.
+ */
 
 public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
     private final int SIZE = 16; // initial capacity of the array
