@@ -1,5 +1,11 @@
 package MyADT;
 
+/**
+ * SortedArrayList - Implements the ADT Sorted List using an array.
+ *
+ * @author Too Chin Xian
+ * */
+
 public class SortedArray<T extends Comparable<T>> implements SortedArrayInterface<T> {
 
     private T[] array;
@@ -15,6 +21,7 @@ public class SortedArray<T extends Comparable<T>> implements SortedArrayInterfac
         array = (T[]) new Comparable[capacity];
     }
 
+    // add newData into the array
     public boolean add(T newData) {
         int i = 0;
         while (i < size && newData.compareTo(array[i]) < 0) {
@@ -26,10 +33,12 @@ public class SortedArray<T extends Comparable<T>> implements SortedArrayInterfac
         return true;
     }
 
+    // Remove all entries from the array
     public void clear() {
         size = 0;
     }
 
+    // Check whether specified entry is in the array
     public boolean contains(T element) {
         boolean found = false;
         for (int index = 0; !found && (index < size); index++) {
@@ -40,15 +49,18 @@ public class SortedArray<T extends Comparable<T>> implements SortedArrayInterfac
         return found;
     }
 
+    // Check size of the array
     public int getNumberOfEntries() {
         return size;
     }
 
+    // Check if the array is empty
     public boolean isEmpty() {
         return size == 0;
     }
 
 
+    // Use to get list of sorted array
     public Integer[] getSortedArr(){
         Object[] arr = new Object[size];
         for (int i = 0; i < size; ++i) {
@@ -71,6 +83,7 @@ public class SortedArray<T extends Comparable<T>> implements SortedArrayInterfac
     }
 
 
+    //check to see if the array is Full
     public boolean isFull() {
         return size == array.length;
     }
@@ -100,6 +113,7 @@ public class SortedArray<T extends Comparable<T>> implements SortedArrayInterfac
         }
     }
 
+    // remove element from array
     public boolean remove(T element) {
         for (int i = 0; i < size; i++) {
             if (element.equals(array[i])) {
@@ -121,6 +135,7 @@ public class SortedArray<T extends Comparable<T>> implements SortedArrayInterfac
         array[lastIndex] = null;
     }
 
+    // Replace existing element with newData
     public boolean replace(T oldData, T newData) {
         boolean found = false;
         int i = 0;
