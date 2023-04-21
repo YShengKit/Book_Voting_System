@@ -11,12 +11,14 @@ public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
         V value;
         Entry<K, V> next;
 
+        // constructor
         public Entry(K key, V value) {
             this.key = key;
             this.value = value;
             this.next = null;
         }
 
+        // getters and setters
         public K getKey() {
             return key;
         }
@@ -37,8 +39,6 @@ public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
             this.next = next;
         }
 
-
-        // getters and setters
     }
 
     // get the index of the array based on the key
@@ -91,13 +91,13 @@ public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
         return entry == null ? null : entry.value;
     }
 
+    // get all the key of the HashMap
     @Override
     public HashSet<K> getKeys(){
         HashSet<K> keySet = new HashSet<>();
         for (Entry<K, V> entry : entries) {
             while (entry != null) {
                 keySet.add(entry.key);
-//                System.out.println(entry.key);
                 entry = entry.next;
             }
         }
@@ -155,6 +155,7 @@ public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
     }
 
 
+    // visualize the structure of HashMap
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
