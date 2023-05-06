@@ -51,7 +51,7 @@ public class Admin {
         Book book = new Book(bookID,bookName,author,descriptions);
         return book;
     }
-
+// remove the existing book
     public void removeBook(Book bookObject){
         //remove
         String bookName = bookObject.getBookName();
@@ -65,7 +65,7 @@ public class Admin {
     }
 
 
-
+// add book to hashmap that stores book name as key, multiple categories for value
     public void addToBookList(String category ,Book bookObject){
         String bookName = bookObject.getBookName();
         if (this.adminBookLists.containsKey(category)) {
