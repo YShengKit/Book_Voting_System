@@ -6,7 +6,7 @@ public class HashSet<E> implements HashSetInterface<E> {
     private int capacity;
     private Node<E>[] table;
 
-    private static final int DEFAULT_CAPACITY = 16;
+    private static final int DEFAULT_CAPACITY = 16; //size of hashset
     private static final double LOAD_FACTOR = 0.75;
 
     private static class Node<E> {
@@ -27,6 +27,7 @@ public class HashSet<E> implements HashSetInterface<E> {
     }
 
     @Override
+    //insert a new element with data type given in a hashset
     public boolean add(E e) {
         if (contains(e)){
             return false;
@@ -42,11 +43,14 @@ public class HashSet<E> implements HashSetInterface<E> {
         return true;
     }
 
+    //return the index of a hashset
     public int hash(E e){
         int hashCode = e.hashCode();
         return (hashCode & 0x7FFFFFFF) % capacity;
     }
 
+
+    //resize the hashset if it reached 75% of hashset
     private void resize(){
         capacity *= 2;
         Node<E>[] oldTable = table;
@@ -65,6 +69,7 @@ public class HashSet<E> implements HashSetInterface<E> {
     }
 
     @Override
+    //remove an existing element in array
     public boolean remove(E e) {
         int index = hash(e);
         Node<E> node = table[index];
@@ -88,6 +93,7 @@ public class HashSet<E> implements HashSetInterface<E> {
     }
 
     @Override
+    //remove all elements from hashset
     public void clear() {
         for (int i=0; i<capacity; i++){
             table[i] = null;
@@ -96,16 +102,19 @@ public class HashSet<E> implements HashSetInterface<E> {
     }
 
     @Override
+    //check the hashset is empty or not
     public boolean isEmpty() {
         return size == 0;
     }
 
     @Override
+    //return size of that hashset
     public int size() {
         return size;
     }
 
     @Override
+    //check particular element existed in hashset or not
     public boolean contains(E e) {
         int index = hash(e);
         Node<E> node = table[index];
@@ -163,6 +172,7 @@ public class HashSet<E> implements HashSetInterface<E> {
     }
 
     @Override
+    // convert the hashset to a string
     public String toString() {
         if (isEmpty()) {
             return "[]";
