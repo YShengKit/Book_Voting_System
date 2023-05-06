@@ -63,7 +63,7 @@ public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
         return entry;
     }
 
-    // put a key-value pair in the hashmap
+    // put a key-value pair (new entry) in the hashmap
     @Override
     public void put(K key, V value) {
         //hashcode
@@ -115,7 +115,7 @@ public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
         return entry != null;
     }
 
-    // remove the entry with the specified key
+    // remove the entry (key value pair) with the specified key
     @Override
     public void remove(K key) {
         int index = getIndex(key);
@@ -143,7 +143,7 @@ public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
         }
     }
 
-    // get the size of the hashmap
+    // get the size of the hashmap (total index)
     @Override
     public int size() {
         int size = 0;
@@ -160,6 +160,7 @@ public class MyHashMap<K, V>  implements MyHashMapInterface<K, V> {
 
 
     // visualize the structure of HashMap
+    //print out the key value pair based on the size
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
